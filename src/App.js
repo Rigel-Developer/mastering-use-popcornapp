@@ -109,14 +109,14 @@ const MovieList = ({ movies }) => {
   );
 };
 
-const Box = ({ children }) => {
+const Box = ({ element }) => {
   const [isOpen, setIsOpen] = useState(true);
   return (
     <div className="box">
       <button className="btn-toggle" onClick={() => setIsOpen((open) => !open)}>
         {isOpen ? "–" : "+"}
       </button>
-      {isOpen && children}
+      {isOpen && element}
     </div>
   );
 };
@@ -221,13 +221,27 @@ export default function App() {
         <NumResults movies={movies} />
       </Navbar>
       <Main>
-        <Box>
+        {/* Passing elements as props */}
+        <Box element={<MovieList movies={movies} />} />
+        <Box
+          element={
+            <>
+              <WatchedSummary watched={watched} />
+              <WatchedMovieList watched={watched} />
+            </>
+          }
+        />
+
+
+        {/* Children form */}
+        {/* <Box>
           <MovieList movies={movies} />
         </Box>
         <Box>
-          <WatchedSummary watched={watched} />
+         <WatchedSummary watched={watched} />
           <WatchedMovieList watched={watched} />
-        </Box>
+          
+        </Box> */}
       </Main>
     </>
   );
